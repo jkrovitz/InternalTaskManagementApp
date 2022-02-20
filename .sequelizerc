@@ -1,0 +1,7 @@
+const path = require('path');
+
+module.exports = {
+    'config': path.resolve('src', 'config', 'database.js'), // This means that all of the configuration is going to be taken from the database object located in the file src/config/database.js
+    'models-path': path.resolve('src', 'models'),
+    'migrations-path': path.resolve('src', 'database', 'migrations')
+}

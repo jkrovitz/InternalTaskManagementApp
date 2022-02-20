@@ -6,7 +6,7 @@ export default (sequelize) => {
     class User extends Model {
         static associate(models) {
             User.RefreshToken = User.hasOne(models.RefreshToken)
-            User.Tasks = User.hasMany(models.Tasks)
+            User.Tasks = User.hasMany(models.Task)
         }
 
         // Takes a password and hashes it with the bcrypt algorithm
@@ -27,9 +27,9 @@ export default (sequelize) => {
                 let tasksToSave = []; // empty array
 
                 // tasks = ["task1", "task2"]
-                //tasksToSave = [{task: "task1"}, {task: "task2"}]
+                //rolesToSave = [{task: "task1"}, {task: "task2"}]
                 if (tasks && Array.isArray(tasks)) { // if tasks is defined and if tasks is an array
-                    tasksToSave = tasks.map(task => ({ task })); // tasksToSave = tasks.map and we're going to convert the task to an object
+                    tasksToSave = tasks.map(task => ({ task })); // rolesToSave = tasks.map and we're going to convert the task to an object
                 }
 
                 await User.create({
