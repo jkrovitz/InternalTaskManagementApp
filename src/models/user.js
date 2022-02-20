@@ -6,7 +6,7 @@ export default (sequelize) => {
     class User extends Model {
         static associate(models) {
             User.RefreshToken = User.hasOne(models.RefreshToken)
-            User.Roles = User.hasMany(models.Roles)
+            User.Tasks = User.hasMany(models.Tasks)
         }
 
         // Takes a password and hashes it with the bcrypt algorithm
@@ -17,19 +17,19 @@ export default (sequelize) => {
         static async createNewUser({
             email,
             password,
-            roles,
+            tasks,
             username,
             firstName,
             lastName,
             refreshToken
         }) {
             return sequelize.transaction(async() => {
-                let rolesToSave = []; // empty array
+                let tasksToSave = []; // empty array
 
-                // roles = ["customer", "admin"]
-                //rolesToSave = [{role: "customer"}, {role: "admin"}]
-                if (roles && Array.isArray(roles)) { // if roles is defined and if roles is an array
-                    rolesToSave = roles.map(role => ({ role })); // rolesToSave = roles.map and we're going to convert the role to an object
+                // tasks = ["task1", "task2"]
+                //tasksToSave = [{task: "task1"}, {task: "task2"}]
+                if (tasks && Array.isArray(tasks)) { // if tasks is defined and if tasks is an array
+                    tasksToSave = tasks.map(task => ({ task })); // tasksToSave = tasks.map and we're going to convert the task to an object
                 }
 
                 await User.create({
@@ -39,13 +39,13 @@ export default (sequelize) => {
                     firstName,
                     lastName,
                     RefreshToken: { token: refreshToken }, // this is how we create an associated refreshToken with this user. We pass an object specifying the token.
-                    Roles: rolesToSave, // needs to be an array of objects; the parameter roles is just going to be an array of strings, so we need to convert that array of string to this array of objects
+                    Tasks: tasksToSave, // needs to be an array of objects; the parameter tasks is just going to be an array of strings, so we need to convert that array of string to this array of objects
                 }, {
-                    include: [User.RefreshToken, User.Roles]
+                    include: [User.RefreshToken, User.Tasks]
                 })
 
                 // we have added all of the properties to the users table
-                // we need to find a way to create this user with roles and a refreshToken and that's where User.RefreshToken = User.hasOne(models.RefreshToken) and User.Roles = User.hasMany(models.Roles) are going to help us.
+                // we need to find a way to create this user with tasks and a refreshToken and that's where User.RefreshToken = User.hasOne(models.RefreshToken) and User.Tasks = User.hasMany(models.Tasks) are going to help us.
 
             })
         }

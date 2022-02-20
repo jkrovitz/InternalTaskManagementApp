@@ -4,19 +4,19 @@ import {
 } from 'sequelize'
 
 export default (sequelize) => {
-    class Role extends Model {
+    class Task extends Model {
         static associate(models) {
-            Role.belongsTo(models.User)
+            Task.belongsTo(models.User)
         }
     }
 
-    Role.init({
-        role: {
+    Task.init({
+        task: {
             type: DataTypes.STRING
         }
     }, {
         sequelize,
-        modelName: 'Role'
+        modelName: 'Task'
     })
-    return Role;
+    return Task;
 }
