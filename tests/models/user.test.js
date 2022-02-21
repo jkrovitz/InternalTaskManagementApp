@@ -1,21 +1,21 @@
-import TestHelpers from '../tests-helpers'
+import TestsHelpers from '../tests-helpers'
 import models from '../../src/models'
 
 describe('User', () => {
 
     // set up
     beforeAll(async() => {
-        await TestHelpers.startDb()
+        await TestsHelpers.startDb()
     })
 
     // tare down
     afterAll(async() => {
-        await TestHelpers.stopDb()
+        await TestsHelpers.stopDb()
     })
 
     // drops the tables before each test and re-creates them using the models definition, not the migration but the model's definition. That's why it's very important to match the mgirations with the models definitions. 
     beforeEach(async() => {
-        await TestHelpers.syncDb()
+        await TestsHelpers.syncDb()
     })
 
     describe('static methods', () => {
@@ -222,6 +222,31 @@ describe('User', () => {
                 const errorObj = error.errors[0]
                 expect(errorObj.message).toEqual('Last name must contain between 3 and 50 characters')
                 expect(errorObj.path).toEqual('lastName')
+            })
+        })
+    })
+
+    describe('scopes', () => {
+        let user
+
+        beforeEach(async() => {
+            user = await TestsHelpers.createNewUser()
+        })
+
+        describe('defaultScope', () => {
+            it('should return a user without a password', async() => {
+                const { User } = models
+                const userFound = await User.findByPk(user.id)
+                expect(userFound.password).toBeUndefined()
+
+            })
+        })
+
+        describe('withPassword', () => {
+            it('should return a user with the password', async() => {
+                const { User } = models
+                const userFound = await User.scope('withPassword').findByPk(user.id)
+                expect(userFound.password).toEqual(expect.any(String))
             })
         })
     })
