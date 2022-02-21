@@ -1,6 +1,7 @@
 import express from 'express'
 import environment from './config/environment'
 import logger from 'morgan'
+import errorsMiddleware from './middlewares/errors'
 
 export default class App {
     constructor() {
@@ -14,7 +15,9 @@ export default class App {
 
     }
 
-    setRoutes() {}
+    setRoutes() {
+        this.app.use(errorsMiddleware)
+    }
 
     getApp() {
         return this.app;
