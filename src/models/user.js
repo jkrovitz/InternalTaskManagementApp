@@ -63,6 +63,9 @@ export default (sequelize) => {
                 isEmail: {
                     msg: 'Not a valid email address',
                 },
+                notNull: {
+                    msg: 'Email is required',
+                }
             },
         },
         password: {
@@ -71,12 +74,16 @@ export default (sequelize) => {
         },
         username: {
             type: DataTypes.STRING(50),
+            allowNull: false,
             unique: true,
             validate: {
                 len: {
                     args: [2, 50], // min and max number of characters
                     msg: 'Username must contain between 2 and 50 characters',
                 },
+                notNull: {
+                    msg: 'Username is required'
+                }
             },
         },
         firstName: {

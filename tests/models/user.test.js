@@ -53,6 +53,176 @@ describe('User', () => {
                 const savedTasks = newUser.Tasks.map(savedTask => savedTask.task).sort(); // each one of these tasks elements, because remember, tasks is an array of tasks objects,, so each saved tasks is a task object and each task object you can call this task method
                 expect(savedTasks).toEqual(data.tasks.sort()) // we use sort to make ure that the two arrays are equal
             })
+            it('should error if we create a new user with an invalid email', async() => {
+                const { User } = models
+                const data = {
+                    email: 'test',
+                    password: 'Test123#',
+                    username: 'test',
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                } catch (err) {
+                    error = err;
+                }
+                expect(error).toBeDefined();
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('Not a valid email address')
+                expect(errorObj.path).toEqual('email')
+            })
+
+            it('should error if we do not pass an email', async() => {
+                const { User } = models
+                const data = {
+                    password: 'Test123#',
+                    username: 'Test',
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                } catch (err) {
+                    error = err;
+                }
+                expect(error).toBeDefined();
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('Email is required')
+                expect(errorObj.path).toEqual('email')
+            })
+
+            it('should error if we create two users with the same email', async() => {
+                const { User } = models
+                const data = {
+                    email: 'test@example.com',
+                    password: 'Test123#',
+                    username: 'Test'
+                }
+                const data2 = {
+                    email: 'test@example.com',
+                    password: 'Test4321',
+                    username: 'Test2'
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                    await User.createNewUser(data2)
+                } catch (err) {
+                    error = err;
+                }
+
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('email must be unique')
+                expect(errorObj.path).toEqual('email')
+            })
+
+            it('should error if we create a new user with an invalid username', async() => {
+                const { User } = models
+                const data = {
+                    email: 'test@example.com',
+                    password: 'Test123#',
+                    username: 'u',
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                } catch (err) {
+                    error = err;
+                }
+                expect(error).toBeDefined();
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('Username must contain between 2 and 50 characters')
+                expect(errorObj.path).toEqual('username')
+            })
+
+            it('should error if we do not pass a username', async() => {
+                const { User } = models
+                const data = {
+                    email: 'test@example.com',
+                    password: 'Test123#',
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                } catch (err) {
+                    error = err;
+                }
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('Username is required')
+                expect(errorObj.path).toEqual('username')
+            })
+
+            it('should error if we create two users with the same username', async() => {
+                const { User } = models
+                const data = {
+                    email: 'test@example.com',
+                    password: 'Test123#',
+                    username: 'test'
+                }
+                const data2 = {
+                    email: 'test2@example.com',
+                    password: 'Test4321',
+                    username: 'test'
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                    await User.createNewUser(data2)
+                } catch (err) {
+                    error = err;
+                }
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('username must be unique')
+                expect(errorObj.path).toEqual('username')
+            })
+
+            it('should error if we create a user with an invalid first name', async() => {
+                const { User } = models
+                const data = {
+                    email: 'test@example.com',
+                    password: 'Test123#',
+                    username: 'test',
+                    firstName: 'Fr',
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                } catch (err) {
+                    error = err;
+                }
+                expect(error).toBeDefined();
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('First name must contain between 3 and 50 characters')
+                expect(errorObj.path).toEqual('firstName')
+            })
+
+            it('should error if we create a user with an invalid last name', async() => {
+                const { User } = models
+                const data = {
+                    email: 'test@example.com',
+                    password: 'Test123#',
+                    username: 'test',
+                    firstName: 'Frank',
+                    lastName: 'S'
+                }
+                let error;
+                try {
+                    await User.createNewUser(data);
+                } catch (err) {
+                    error = err;
+                }
+                expect(error).toBeDefined();
+                expect(error.errors.length).toEqual(1)
+                const errorObj = error.errors[0]
+                expect(errorObj.message).toEqual('Last name must contain between 3 and 50 characters')
+                expect(errorObj.path).toEqual('lastName')
+            })
         })
     })
 })
