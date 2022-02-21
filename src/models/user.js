@@ -124,8 +124,10 @@ export default (sequelize) => {
 
     // This hook is going to guarantee that every user we save, the password is going to be hashed, so we will NEVER be saving a plain text password.
     User.beforeSave(async(user, options) => {
-        const hashedPassword = await User.hashPassword(user.password)
-        user.password = hashedPassword
+        if (user.password) {
+            const hashedPassword = await User.hashPassword(user.password)
+            user.password = hashedPassword
+        }
     })
 
     User.afterCreate((user, options) => {

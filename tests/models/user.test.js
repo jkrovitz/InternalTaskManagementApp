@@ -275,4 +275,12 @@ describe('User', () => {
             })
         })
     })
+
+    describe('hooks', () => {
+        it('should not attempt to hash the password if it is not given', async() => {
+            const user = await TestsHelpers.createNewUser();
+            user.email = 'test2@example.com'
+            await user.save();
+        })
+    })
 })
