@@ -6,13 +6,14 @@ import {
 export default (sequelize) => {
     class Task extends Model {
         static associate(models) {
-            Task.belongsTo(models.User)
+            Task.belongsTo(models.User, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
         }
     }
 
     Task.init({
         task: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     }, {
         sequelize,
