@@ -8,7 +8,7 @@ const { User } = models
 
 router.post('/register', asyncWrapper(async(req, res) => {
     const { email } = req.body
-    const user = awaitUser.findOne({ where: { email } })
+    const user = await User.findOne({ where: { email } })
 
     if (user) {
         return res.status(200).send({ sucess: false, message: 'User already exists' })
@@ -30,3 +30,5 @@ router.post('/register', asyncWrapper(async(req, res) => {
     })
 
 }))
+
+export default router;
