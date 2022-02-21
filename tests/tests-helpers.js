@@ -46,4 +46,9 @@ export default class TestHelpers {
 
     }
 
+    static getApp() {
+        const App = require('../src/app').default
+        return new App().getApp()
+    }
+
 }
