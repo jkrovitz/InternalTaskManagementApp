@@ -34,7 +34,7 @@ export default (sequelize) => {
                     tasksToSave = tasks.map(task => ({ task })); // rolesToSave = tasks.map and we're going to convert the task to an object
                 }
 
-                await User.create({
+                return User.create({
                     email,
                     password,
                     username,
