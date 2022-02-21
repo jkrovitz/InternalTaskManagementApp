@@ -14,6 +14,8 @@ export default (sequelize) => {
             return bcrypt.hash(password, environment.saltRounds) // first argument is a string which will be our password and the second argument is going to be the saltOrRounds, which can be a string or number and it returns a Promise that resolves to a string, which will be the hashstring. We will get the value for the SaltOrRounds by importing environment from '../config/environment' at the top of the file.
         }
 
+        // const result = await createNewUser(...)
+        //result === undefined       
         static async createNewUser({
             email,
             password,
@@ -23,7 +25,7 @@ export default (sequelize) => {
             lastName,
             refreshToken
         }) {
-            return sequelize.transaction(async() => {
+            return sequelize.transaction(() => {
                 let tasksToSave = []; // empty array
 
                 // tasks = ["task1", "task2"]
@@ -117,6 +119,10 @@ export default (sequelize) => {
     User.beforeSave(async(user, options) => {
         const hashedPassword = await User.hashPassword(user.password)
         user.password = hashedPassword
+    })
+
+    User.afterCreate((user, options) => {
+        delete user.dataValues.password
     })
 
     return User;
