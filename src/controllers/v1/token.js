@@ -22,7 +22,7 @@ router.post(
     if (!savedToken || !savedToken.token) {
       return res
         .status(401)
-        .savedToken({ success: false, message: 'You must login first' })
+        .send({ success: false, message: 'You must login first' })
     }
 
       const payload = {email}
