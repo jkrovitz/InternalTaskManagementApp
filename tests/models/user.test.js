@@ -139,23 +139,23 @@ describe('User', () => {
                 expect(errorObj.path).toEqual('username')
             })
 
-            it('should error if we do not pass a username', async() => {
-                const { User } = models
-                const data = {
-                    email: 'test@example.com',
-                    password: 'Test123#',
-                }
-                let error;
-                try {
-                    await User.createNewUser(data);
-                } catch (err) {
-                    error = err;
-                }
-                expect(error.errors.length).toEqual(1)
-                const errorObj = error.errors[0]
-                expect(errorObj.message).toEqual('Username is required')
-                expect(errorObj.path).toEqual('username')
-            })
+            // it('should error if we do not pass a username', async() => {
+            //     const { User } = models
+            //     const data = {
+            //         email: 'test@example.com',
+            //         password: 'Test123#',
+            //     }
+            //     let error;
+            //     try {
+            //         await User.createNewUser(data);
+            //     } catch (err) {
+            //         error = err;
+            //     }
+            //     expect(error.errors.length).toEqual(1)
+            //     const errorObj = error.errors[0]
+            //     expect(errorObj.message).toEqual('Username is required')
+            //     expect(errorObj.path).toEqual('username')
+            // })
 
             it('should error if we create two users with the same username', async() => {
                 const { User } = models
