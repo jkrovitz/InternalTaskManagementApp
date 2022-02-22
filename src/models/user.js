@@ -6,9 +6,11 @@ export default (sequelize) => {
   class User extends Model {
     static associate(models) {
       User.RefreshToken = User.hasOne(models.RefreshToken)
-      User.Tasks = User.hasMany(models.Task)
+      User.Task = User.hasMany(models.Task, {
+        foreignKey: 'UserId',
+      })
     }
-
+    
     // Takes a password and hashes it with the bcrypt algorithm
     static async hashPassword(password) {
       return bcrypt.hash(password, environment.saltRounds) // first argument is a string which will be our password and the second argument is going to be the saltOrRounds, which can be a string or number and it returns a Promise that resolves to a string, which will be the hashstring. We will get the value for the SaltOrRounds by importing environment from '../config/environment' at the top of the file.
@@ -41,16 +43,17 @@ export default (sequelize) => {
           firstName,
           lastName,
           RefreshToken: { token: refreshToken }, // this is how we create an associated refreshToken with this user. We pass an object specifying the token.
-          Tasks: tasksToSave, // needs to be an array of objects; the parameter tasks is just going to be an array of strings, so we need to convert that array of string to this array of objects
+          Task: tasksToSave, // needs to be an array of objects; the parameter tasks is just going to be an array of strings, so we need to convert that array of string to this array of objects
         }, {
-          include: [User.RefreshToken, User.Tasks]
+          include: [User.RefreshToken, User.Task]
         })
 
         // we have added all of the properties to the users table
-        // we need to find a way to create this user with tasks and a refreshToken and that's where User.RefreshToken = User.hasOne(models.RefreshToken) and User.Tasks = User.hasMany(models.Tasks) are going to help us.
+        // we need to find a way to create this user with tasks and a refreshToken and that's where User.RefreshToken = User.hasOne(models.RefreshToken) and User.Task = User.hasMany(models.Task) are going to help us.
 
       })
     }
+
   }
 
   // Defining the properties of the user model

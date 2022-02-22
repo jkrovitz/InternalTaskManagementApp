@@ -50,9 +50,9 @@ describe('User', () => {
                 expect(newUser.firstName).toEqual(data.firstName)
                 expect(newUser.lastName).toEqual(data.lastName)
                 expect(newUser.RefreshToken.token).toEqual(data.refreshToken)
-                expect(newUser.Tasks.length).toEqual(2)
-                const savedTasks = newUser.Tasks.map(savedTask => savedTask.task).sort(); // each one of these tasks elements, because remember, tasks is an array of tasks objects,, so each saved tasks is a task object and each task object you can call this task method
-                expect(savedTasks).toEqual(data.tasks.sort()) // we use sort to make ure that the two arrays are equal
+                expect(newUser.Task.length).toEqual(2)
+                const savedTask = newUser.Task.map(savedTask => savedTask.task).sort(); // each one of these tasks elements, because remember, tasks is an array of tasks objects,, so each saved tasks is a task object and each task object you can call this task method
+                expect(savedTask).toEqual(data.tasks.sort()) // we use sort to make ure that the two arrays are equal
             })
             it('should error if we create a new user with an invalid email', async() => {
                 const { User } = models

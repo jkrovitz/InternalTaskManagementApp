@@ -1,3 +1,9 @@
+/**
+ * The task controller handles creating, viewing, editing, and deleting tasks.
+ *
+ * @author Jeremy Krovitz
+ */
+
 import { Router } from 'express'
 import models from '../../models'
 import asyncWrapper from '../../utils/asyncWrapper'

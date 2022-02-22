@@ -1,3 +1,9 @@
+/**
+ * The token controller handles the tokens.
+ *
+ * @author Jeremy Krovitz
+ */
+
 import { Router } from 'express'
 import models from '../../models'
 import asyncWrapper from '../../utils/asyncWrapper'

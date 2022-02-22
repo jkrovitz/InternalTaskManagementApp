@@ -1,3 +1,10 @@
+/**
+ * The login controller handles loging the user in if their credentials are
+ * valid or displays an error if the credentials are invalid.
+ *
+ * @author Jeremy Krovitz
+ */
+
 import { Router } from 'express'
 import models from '../../models'
 import asyncWrapper from '../../utils/asyncWrapper'

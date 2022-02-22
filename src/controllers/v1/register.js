@@ -1,3 +1,10 @@
+/**
+ * The register controller allows a user to create an account, and if the email
+ * already exists, an error is displayed.
+ *
+ * @author Jeremy Krovitz
+ */
+
 import { Router } from 'express'
 import models from '../../models'
 import asyncWrapper from '../../utils/asyncWrapper'

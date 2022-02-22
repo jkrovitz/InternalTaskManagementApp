@@ -1,4 +1,10 @@
-module.exports = {
+/**
+* This file contains the database configurations for
+ * the development and test databases.
+ *
+ * @author Jeremy Krovitz
+*/
+ module.exports = {
 	development: {
 		username: process.env.DB_USERNAME || 'postgres',
 		password: process.env.DB_PASSWORD || 'postgres',

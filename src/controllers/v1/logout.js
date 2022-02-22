@@ -1,3 +1,9 @@
+/**
+ * The logout controller allows user to logout of the application.
+ *
+ * @author Jeremy Krovitz
+ */
+
 import { Router } from 'express';
 import models from '../../models';
 import asyncWrapper from '../../utils/asyncWrapper';

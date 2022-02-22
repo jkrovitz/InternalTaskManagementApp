@@ -1,8 +1,14 @@
+/**
+ * This file handles the migration for the task table.
+ *
+ * @author Jeremy Krovitz
+ */
+
 'use strict';
 const { DataTypes } = require('sequelize');
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('Tasks', {
+        return queryInterface.createTable('Task', {
             id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -17,6 +23,20 @@ module.exports = {
             taskDetails: {
               type: Sequelize.TEXT,
             },
+            // UserId :{
+            //     type: Sequelize.INTEGER,
+            //     onDelete: 'CASCADE',
+            //     references: {
+            //         model: 'User',
+            //         key: 'id'
+            //     }
+            // },
+            UserId: {
+                type: Sequelize.INTEGER,
+                references: { model: { tableName: 'Task' }, key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
@@ -25,22 +45,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
-            // UserId: {
-            //     type: Sequelize.INTEGER,
-            //     references: { model: { tableName: 'Users' }, key: 'id' },
-            //     // onUpdate: 'CASCADE',
-            //     // onDelete: 'CASCADE',
-            // }
-            UserId :{
-                type: DataTypes.INTEGER,
-                references: {
-                    model: 'models.User',
-                    key: 'id'
-                }
-            }
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('Tasks');
+        return queryInterface.dropTable('Task');
     }
 };

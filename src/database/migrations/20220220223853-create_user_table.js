@@ -1,7 +1,13 @@
+/**
+ * This file handles the migration for the user table.
+ *
+ * @author Jeremy Krovitz
+ */
+
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('Users', {
+        return queryInterface.createTable('User', {
             id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -39,6 +45,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('Users');
+        return queryInterface.dropTable('User');
     }
 };

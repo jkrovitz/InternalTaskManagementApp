@@ -1,3 +1,8 @@
+/**
+ * Applicaiton controllers are registered in this file.
+ *
+ * @author Jeremy Krovitz
+ */
 import { Router } from 'express'
 import registerRouter from './register'
 import loginRouter from './login'

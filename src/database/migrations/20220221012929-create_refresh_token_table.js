@@ -1,3 +1,9 @@
+/**
+ * This file handles the migration for the token table.
+ *
+ * @author Jeremy Krovitz
+ */
+
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {

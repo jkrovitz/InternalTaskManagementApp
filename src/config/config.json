@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "internal-task-management-app-db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "internal-task-management-app-test-db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

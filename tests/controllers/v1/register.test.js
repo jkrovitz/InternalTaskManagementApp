@@ -44,9 +44,9 @@ describe('register', () => {
         expect(newUser.firstName).toEqual(data.firstName)
         expect(newUser.lastName).toEqual(data.lastName)
         expect(newUser.password).toBeUndefined() // we don't return the password
-        expect(newUser.Tasks.length).toEqual(data.tasks.length)
-        const savedTasks = newUser.Tasks.map(savedTask => savedTask.task).sort()
-        expect(savedTasks).toEqual(data.tasks.sort())
+        expect(newUser.Task.length).toEqual(data.tasks.length)
+        const savedTask = newUser.Task.map(savedTask => savedTask.task).sort()
+        expect(savedTask).toEqual(data.tasks.sort())
         expect(newUser.RefreshToken.token).toEqual(expect.any(String))
     })
 

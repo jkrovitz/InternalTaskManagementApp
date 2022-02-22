@@ -6,12 +6,12 @@ import {
 export default (sequelize) => {
     class Task extends Model {
         static associate(models) {
-            Task.belongsTo(models.User, {foreignKey: 'UserId', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+            Task.belongsTo(models.User, {foreignKey: 'id', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
         }
 
 
         static async createNewTask({task,
-                                    taskDetails
+                                       taskDetails
                                    }) {
             return sequelize.transaction(() => {
 
@@ -35,10 +35,6 @@ export default (sequelize) => {
         },
         UserId :{
             type: DataTypes.INTEGER,
-            references: {
-                model: 'models.User',
-                key: 'id'
-            }
         }
 
     }, {
