@@ -19,7 +19,6 @@ export default class App {
     setRoutes() {
         this.app.use('/v1', v1Routes)
         this.app.use(errorsMiddleware)
-
     }
 
     getApp() {
@@ -29,7 +28,7 @@ export default class App {
     listen() {
         const { port } = environment
         this.app.listen(port, () => {
-            console.log('Listening at port ${port}')
+            console.log(`Listening at port ${port}`)
         })
     }
 }

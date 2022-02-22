@@ -9,6 +9,9 @@ import dbConfig from './config/database'
 		const db = new Database(environment.nodeEnv, dbConfig) // create new database and pass in environment and dbConfig
 		await db.connect()
 
+		const App = require('./app').default
+		const app = new App();
+		app.listen()
 	} catch (err) {
 		console.error('Something went wrong when initializing the server:\n', err.stack) // Logging message and printing the error stack
 	}
