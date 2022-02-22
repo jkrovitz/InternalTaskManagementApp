@@ -3,7 +3,7 @@ import models from '../../../src/models'
 import request from 'supertest'
 import JWTUtils from '../../../src/utils/jwt-utils'
 
-describe('register', () => {
+describe('token', () => {
   let app
   let newUserResponse
 
