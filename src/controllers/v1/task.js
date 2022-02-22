@@ -23,18 +23,65 @@ router.post('/task', asyncWrapper(async (req, res) => {
       .then(data => {
         if (data) {
           res.send(data);
-        } else {
+        } else { // handles case where task doesn't exist in the database
           res.status(404).send({
             message: `Cannot find Task with id=${id}.`
           });
         }
       })
-      .catch(err => {
+      .catch(err => { // handles internal server failure
         res.status(500).send({
           message: "Error retrieving Task with id=" + id
         });
       });
-  }))
+  })),
+
+router.put('/task/:id/', asyncWrapper(async(req, res) => {
+  const id = req.params.id;
+  Task.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Task was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Task with id=${id}. Maybe the task was not found or the request body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Task with id=" + id
+      });
+    });
+})),
+
+router.delete('/task/:id/', asyncWrapper(async(req, res) => {
+  const id = req.params.id;
+   Task.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "The task was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete the task with id=${id}. Maybe the task was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete the task with id=" + id
+      });
+    });
+
+}))
 )
 
 export default router

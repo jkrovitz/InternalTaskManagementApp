@@ -1,6 +1,2 @@
-# Sequelize course
+# Task Management Application
 
-## Prerequisites
-
-* NVM
-* Docker

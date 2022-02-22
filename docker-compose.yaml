@@ -2,7 +2,7 @@ version: "3.9"
 services:
   postgres:
     image: postgres:13
-    container_name: sequelize-course-db  
+    container_name: internal-task-management-app-db
     env_file:
       - .env
     environment:
@@ -11,7 +11,7 @@ services:
       - ${DB_PORT:-5432}:5432
   postgres-test:
     image: postgres:13
-    container_name: sequelize-course-test-db
+    container_name: internal-task-management-app-test-db
     env_file:
       - .env
     environment:
