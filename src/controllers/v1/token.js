@@ -1,11 +1,11 @@
-import { Router } from 'express';
-import models from '../../models';
-import asyncWrapper from '../../utils/asyncWrapper';
-import JWTUtils from '../../utils/jwt-utils';
+import { Router } from 'express'
+import models from '../../models'
+import asyncWrapper from '../../utils/asyncWrapper'
+import JWTUtils from '../../utils/jwt-utils'
 import requiresAuth from '../../middlewares/requiresAuth'
 
-const router = Router();
-const { User, RefreshToken } = models;
+const router = Router()
+const { User, RefreshToken } = models
 
 router.post(
   '/token',
@@ -30,6 +30,6 @@ router.post(
 
       return res.status(200).send({success: true, data: {accessToken : newAccessToken}})
   })
-);
+)
 
-export default router;
+export default router
