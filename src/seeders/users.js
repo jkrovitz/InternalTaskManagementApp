@@ -1,3 +1,10 @@
+/**
+ * This file handles seeding of users.
+ *
+ * @author Jeremy Krovitz
+ */
+
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('User', [{

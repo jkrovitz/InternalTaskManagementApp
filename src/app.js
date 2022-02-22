@@ -1,3 +1,10 @@
+/**
+ * This file sets up the main app.
+ *
+ * @author Jeremy Krovitz
+ */
+
+
 import express from 'express'
 import environment from './config/environment'
 import logger from 'morgan'

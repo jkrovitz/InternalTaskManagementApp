@@ -6,7 +6,7 @@ import {
 export default (sequelize) => {
     class Task extends Model {
         static associate(models) {
-            Task.belongsTo(models.User, {foreignKey: 'id', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+            Task.belongsTo(models.User, {foreignKey: 'UserId', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
         }
 
 

@@ -23,19 +23,13 @@ module.exports = {
             taskDetails: {
               type: Sequelize.TEXT,
             },
-            // UserId :{
-            //     type: Sequelize.INTEGER,
-            //     onDelete: 'CASCADE',
-            //     references: {
-            //         model: 'User',
-            //         key: 'id'
-            //     }
-            // },
-            UserId: {
+            UserId :{
                 type: Sequelize.INTEGER,
-                references: { model: { tableName: 'Task' }, key: 'id' },
-                onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
+                references: {
+                    model: 'User',
+                    key: 'UserId'
+                }
             },
             createdAt: {
                 allowNull: false,

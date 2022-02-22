@@ -1,3 +1,10 @@
+/**
+ * This file handles seeding of tasks.
+ *
+ * @author Jeremy Krovitz
+ */
+
+
 'use strict';
 
 module.exports = {

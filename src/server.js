@@ -1,4 +1,11 @@
-import './config' // we put import './config' at the top of the file because this is going to execute first 
+/**
+ * This file creates the server.
+ *
+ * @author Jeremy Krovitz
+ */
+
+
+import './config' // we put import './config' at the top of the file because this is going to execute first
 import Database from './database'
 import environment from './config/environment' // and then we need to execute or import the environment variables after we have loaded all of our environment variables 
 import dbConfig from './config/database'
