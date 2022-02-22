@@ -10,7 +10,8 @@ router.post(
   '/login',
   asyncWrapper(async (req, res) => {
     const { email, password } = req.body
-    const user = await User.scope('withPassword').findOne({ where: { email } })
+    const user = await User.scope('withPassword').findOne({
+      where: { email } })
 
     if (!user || !(await user.comparePasswords(password))) {
       return res
@@ -44,7 +45,7 @@ router.post(
         refreshToken,
       },
     })
-  })
+  }),
 )
 
 export default router

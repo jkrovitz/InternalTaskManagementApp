@@ -17,7 +17,8 @@ router.post('/register', asyncWrapper(async(req, res) => {
     const payload = { email }
     const accessToken = JWTUtils.generateAccessToken(payload) // we are generating an access token for a new user
     const refreshToken = JWTUtils.generateRefreshToken(payload) // we are generating a refresh token for a new user
-    await User.createNewUser({...req.body, refreshToken }) // pass all of the day in the request body and the refreshToken
+    await User.createNewUser({...req.body, refreshToken }) // pass all of the day in the request body and the
+    // refreshToken
 
     // if this doesn't fail
     return res.status(200).send({

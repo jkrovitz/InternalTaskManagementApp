@@ -9,7 +9,8 @@ const { User, RefreshToken } = models
 
 router.post(
   '/token',
-  requiresAuth('refreshToken'), // if we're making a request and it doesn't contain a token or it is malformed or anything than the logic below won't be executed.
+  requiresAuth('refreshToken'), // if we're making a request and it doesn't contain a token or it is malformed
+  // or anything than the logic below won't be executed.
   asyncWrapper(async (req, res) => {
     const{jwt: {email},
     } = req.body

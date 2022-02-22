@@ -3,6 +3,7 @@ import registerRouter from './register'
 import loginRouter from './login'
 import tokenRouter from './token'
 import logoutRouter from './logout'
+import taskRouter from './task'
 
 const router = Router()
 
@@ -11,5 +12,6 @@ router.use(registerRouter)
 router.use(loginRouter)
 router.use(tokenRouter)
 router.use(logoutRouter)
+router.use(taskRouter)
 
 export default router;
